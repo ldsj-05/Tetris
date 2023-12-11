@@ -1,0 +1,197 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 12/07/2023 05:08:59 PM
+// Design Name: 
+// Module Name: block
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module block(
+    input clock,
+    input rot,
+    input pos_y,
+    input pos_x,
+    input piece,
+    output reg blk_1,
+    output reg blk_2,
+    output reg blk_3,
+    output reg blk_4,
+    output blockdimension
+    );
+    reg [3:0]blockwidth;
+    
+    
+    initial blockwidth = 16;
+    
+     always @ (*) begin
+        case (piece)
+            0: begin    //error
+                 blk_1 = 0;
+                 blk_2 = 0;
+                 blk_3 = 0;
+                 blk_4 = 0;
+            end
+///////////////////////////////////////////////////////////////////////
+            1: begin    // I Block
+                 if (rot == 0 || rot == 2) begin
+                     blk_1 = (pos_y * blockwidth) + pos_x;
+                     blk_2 = ((pos_y + 1) * blockwidth) + pos_x;
+                     blk_3 = ((pos_y + 2) * blockwidth) + pos_x;
+                     blk_4 = ((pos_y + 3) * blockwidth) + pos_x;
+                     width = 1;
+                     height = 4;
+                 end else begin
+                     blk_1 = (pos_y * blockwidth) + pos_x;
+                     blk_2 = (pos_y * blockwidth) + pos_x + 1;
+                     blk_3 = (pos_y * blockwidth) + pos_x + 2;
+                     blk_4 = (pos_y * blockwidth) + pos_x + 3;
+                 end
+            end
+  ////////////////////////////////////////////////////////////////////////          
+            2: begin   //T block
+                case (rot)
+                    0: begin
+                        blk_1 = (pos_y * blockwidth) + pos_x + 1;
+                        blk_2 = ((pos_y + 1) * blockwidth) + pos_x;
+                        blk_3 = ((pos_y + 1) * blockwidth) + pos_x + 1;
+                        blk_4 = ((pos_y + 1) * blockwidth) + pos_x + 2;
+                end
+                    1: begin
+                        blk_1 = (pos_y * blockwidth) + pos_x;
+                        blk_2 = ((pos_y + 1) * blockwidth) + pos_x;
+                        blk_3 = ((pos_y + 2) * blockwidth) + pos_x;
+                        blk_4 = ((pos_y + 1) * blockwidth) + pos_x + 1;
+                    end
+                    2: begin
+                        blk_1 = (pos_y * blockwidth) + pos_x;
+                        blk_2 = (pos_y * blockwidth) + pos_x + 1;
+                        blk_3 = (pos_y * blockwidth) + pos_x + 2;
+                        blk_4 = ((pos_y + 1) * blockwidth) + pos_x + 1;
+                    end
+                    3: begin
+                        blk_1 = (pos_y * blockwidth) + pos_x + 1;
+                        blk_2 = ((pos_y + 1) * blockwidth) + pos_x + 1;
+                        blk_3 = ((pos_y + 2) * blockwidth) + pos_x + 1;
+                        blk_4 = ((pos_y + 1) * blockwidth) + pos_x;
+                    end
+                endcase
+            end
+                        
+////////////////////////////////////////////////////////////////////////////////////                        
+                        
+         3: begin //S Block
+                if (rot == 0 || rot == 2) begin
+                    blk_1 = (pos_y * blockwidth) + pos_x + 1;
+                    blk_2 = (pos_y * blockwidth) + pos_x + 2;
+                    blk_3 = ((pos_y + 1) * blockwidth) + pos_x;
+                    blk_4 = ((pos_y + 1) * blockwidth) + pos_x + 1;
+                end else begin
+                    blk_1 = (pos_y * blockwidth) + pos_x;
+                    blk_2 = ((pos_y + 1) * blockwidth) + pos_x;
+                    blk_3 = ((pos_y + 1) * blockwidth) + pos_x + 1;
+                    blk_4 = ((pos_y + 2) * blockwidth) + pos_x + 1;
+                end
+            end
+ 
+ ///////////////////////////////////////////////////////////////////////////////////////          
+            
+            
+            4: begin   //Square Block
+                blk_1 = (pos_y * blockwidth) + pos_x;
+                blk_2 = (pos_y * blockwidth) + pos_x + 1;
+                blk_3 = ((pos_y + 1) * blockwidth) + pos_x;
+                blk_4 = ((pos_y + 1) * blockwidth) + pos_x + 1;
+                end
+            
+///////////////////////////////////////////////////////////////////////////////////////            
+
+            5: begin    //Z block
+                if (rot == 0 || rot == 2) begin
+                    blk_1 = (pos_y * blockwidth) + pos_x;
+                    blk_2 = (pos_y * blockwidth) + pos_x + 1;
+                    blk_3 = ((pos_y + 1) * blockwidth) + pos_x + 1;
+                    blk_4 = ((pos_y + 1) * blockwidth) + pos_x + 2;
+                end else begin
+                    blk_1 = (pos_y * blockwidth) + pos_x + 1;
+                    blk_2 = ((pos_y + 1) * blockwidth) + pos_x;
+                    blk_3 = ((pos_y + 2) * blockwidth) + pos_x;
+                    blk_4 = ((pos_y + 1) * blockwidth) + pos_x + 1;
+                end
+            end
+            
+            
+            6: begin   //J block
+                case (rot)
+                    0: begin
+                        blk_1 = (pos_y * blockwidth) + pos_x + 1;
+                        blk_2 = ((pos_y + 1) * blockwidth) + pos_x + 1;
+                        blk_3 = ((pos_y + 2) * blockwidth) + pos_x + 1;
+                        blk_4 = ((pos_y + 2) * blockwidth) + pos_x;
+                    end
+                    1: begin
+                        blk_1 = (pos_y * blockwidth) + pos_x;
+                        blk_2 = ((pos_y + 1) * blockwidth) + pos_x;
+                        blk_3 = ((pos_y + 1) * blockwidth) + pos_x + 1;
+                        blk_4 = ((pos_y + 1) * blockwidth) + pos_x + 2;
+                    end
+                    2: begin
+                        blk_1 = (pos_y * blockwidth) + pos_x;
+                        blk_2 = ((pos_y + 1) * blockwidth) + pos_x;
+                        blk_3 = ((pos_y + 2) * blockwidth) + pos_x;
+                        blk_4 = (pos_y * blockwidth) + pos_x + 1;
+                    end
+                    3: begin
+                        blk_1 = (pos_y * blockwidth) + pos_x;
+                        blk_2 = (pos_y * blockwidth) + pos_x + 1;
+                        blk_3 = (pos_y * blockwidth) + pos_x + 2;
+                        blk_4 = ((pos_y + 1) * blockwidth) + pos_x + 2;
+                    end
+                endcase
+            end
+            
+            7: begin  //L block
+                case (rot)
+                    0: begin
+                        blk_1 = (pos_y * blockwidth) + pos_x;
+                        blk_2 = ((pos_y + 1) * blockwidth) + pos_x;
+                        blk_3 = ((pos_y + 2) * blockwidth) + pos_x;
+                        blk_4 = ((pos_y + 2) * blockwidth) + pos_x + 1;
+                    end
+                    1: begin
+                        blk_1 = ((pos_y + 1) * blockwidth) + pos_x;
+                        blk_2 = (pos_y * blockwidth) + pos_x;
+                        blk_3 = (pos_y * blockwidth) + pos_x + 1;
+                        blk_4 = (pos_y * blockwidth) + pos_x + 2;
+                    end
+                    2: begin
+                        blk_1 = (pos_y * blockwidth) + pos_x + 1;
+                        blk_2 = ((pos_y + 1) * blockwidth) + pos_x + 1;
+                        blk_3 = ((pos_y + 2) * blockwidth) + pos_x + 1;
+                        blk_4 = (pos_y * blockwidth) + pos_x;
+                    end
+                    3: begin
+                        blk_1 = ((pos_y + 1) * blockwidth) + pos_x;
+                        blk_2 = ((pos_y + 1) * blockwidth) + pos_x + 1;
+                        blk_3 = ((pos_y + 1) * blockwidth) + pos_x + 2;
+                        blk_4 = (pos_y * blockwidth) + pos_x + 2;
+                    end
+                endcase
+            end
+        endcase
+    end
+    
+endmodule

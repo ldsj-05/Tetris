@@ -4,7 +4,8 @@ FPGA Tetreex
 Team Members
 Carly Butler, Leah Jones, Sarah Koesema, Hieu Nguyen
 
-Demo Video Link
+Demo Video Link: https://drive.google.com/file/d/13dF-J7LcP5AQ-712YVvnB01IQknZNUIQ/view?usp=sharing
+
 
 Overview
 Inspired by the classic 1980s puzzle game Tetris, we decided to create a version of the game using what we learned in EC311. Our edition uses button input for player controls, the seven segment display to keep track of score, and shows graphics on a monitor using VGA display.

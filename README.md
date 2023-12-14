@@ -13,6 +13,8 @@ How to Run
 Needed:
 Nexys A7 FPGA Board
 VGA Cable
+Download all required files and set topmodule and topmodule_tb as top. 
+
 
 Player Controls:
 Right Button: Shift Right
